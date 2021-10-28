@@ -1,20 +1,25 @@
 const db = require('../../config/mongoose')
 const Record = require('../record')
+const Category = require('../category')
 
-db.once('open', () => {
-  
-  Promise.all(Array.from(
-    { length: 10 }, (_, i) => {
-      return Record.create({
-        name: `expense-${i}`,
-        date: Date.now(),
-        amount: 100 + i
-      })
-    }
-  ))
-  .then(() => {
+const SEED_CATEGORY = { name: '家居物業' }
+
+db.once('open', () =>
+  Category.create({ name: SEED_CATEGORY.name })
+    .then((category) =>
+      Promise.all(Array.from(
+        { length: 5 }, 
+        (_, i) => Record.create({
+          name: `expense-${i}`,
+          date: Date.now(),
+          amount: 100 + i,
+          categoryId: category._id
+        })
+      ))
+    )
+    .then(() => {
       console.log('done!')
       process.exit()
     })
-    .catch(err => console.log(err))
-})
+)
+
