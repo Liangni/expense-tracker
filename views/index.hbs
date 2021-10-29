@@ -1,0 +1,29 @@
+
+{{!-- records --}}
+<div class="row align-items-center">
+  <div class="col-8 offset-4">
+    <table class="table table-striped">
+      <tbody>
+        {{#each records}}
+        <tr>
+          <th>
+            <div class="row align-items-center">
+              <div class="col-2">
+                <span style="font-size: 3em"><i class='{{getIcon this.category ../CATEGORY}}'></i></span>
+              </div>
+              <div class="col-8">
+                <h5>{{ this.name }}</h5>
+                <small>{{ this.date }}</small>
+              </div>
+              <div class="col-2">
+                <h5>{{ this.amount }}</h5>
+              </div>
+            </div>
+          </th>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
