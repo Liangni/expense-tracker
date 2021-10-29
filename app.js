@@ -1,9 +1,9 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-const Category = require('./models/category')
+const bodyParser=require('body-parser')
 
 const Record = require('./models/record')
-// const Category = require('./models/category')
+const Category = require('./models/category')
 
 const PORT = 3000
 const CATEGORY = {
@@ -32,6 +32,8 @@ app.engine('hbs', exphbs({
   }
 }))
 app.set('view engine', 'hbs')
+
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   Record.find()
@@ -66,6 +68,25 @@ app.get('/records/:id/edit', (req, res) => {
           record.date = record.date.toISOString().slice(0,10)
           res.render('edit', { record })
         })
+    })
+    .catch(err => console.log(err))
+})
+
+app.post('/records/:id/edit',(req, res) => {
+  const recordId = req.params.id
+  const { name, date, category, amount} = req.body
+  return Record.findById(recordId)
+    .then(record => {
+      return Category.findOne({name: category})
+        .then(category => {
+          record.name = name
+          record.date = date
+          record.categoryId = category._id
+          record.amount = amount
+          return record.save()
+        })
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
 })
