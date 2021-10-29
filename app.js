@@ -13,7 +13,7 @@ const CATEGORY = {
   餐飲食品: 'fas fa-utensils',
   其他: 'fas fa-pen',
 }
-let totalAmount = 0
+let totalAmount
 const app = express()
 
 
@@ -37,9 +37,10 @@ app.get('/', (req, res) => {
   Record.find()
     .lean()
     .then(records => {
-      category.find()
+      Category.find()
         .lean()
         .then(categories => {
+          totalAmount = 0
           records.forEach(record => {
             const recordCategory = categories.find(category => category._id.equals(record.categoryId))
             record.category = recordCategory.name
