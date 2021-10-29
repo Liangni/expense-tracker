@@ -7,7 +7,7 @@
 </div>
 
 {{!-- records --}}
-<div class="row align-items-center">
+<div class="row">
   <div class="col-8 offset-4">
     <table class="table table-striped">
       <tbody>
@@ -29,6 +29,9 @@
           </th>
           <td class="align-middle">
             <a href="/records/{{ this._id }}/edit">修改</a>
+            <form action="/records/{{ this._id }}/delete" method="POST" style="display: inline;">
+              <button class="btn btn-danger" type="submit">刪除</button>
+            </form>
           </td>
         </tr>
         {{/each}}

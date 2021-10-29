@@ -91,6 +91,14 @@ app.post('/records/:id/edit',(req, res) => {
     .catch(err => console.log(err))
 })
 
+app.post('/records/:id/delete', (req, res) => {
+  recordId = req.params.id
+  return Record.findById(recordId)
+    .then(record => record.remove())
+    .then(res.redirect('/'))
+    .catch(err => console.log(err))
+})
+
 app.listen(PORT, () => {
   console.log(`App is running on https://localhost:${PORT}!`)
 })
