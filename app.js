@@ -1,6 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-const category = require('./models/category')
+const Category = require('./models/category')
 
 const Record = require('./models/record')
 // const Category = require('./models/category')
@@ -19,13 +19,16 @@ const app = express()
 
 require('./config/mongoose')
 
-app.engine('hbs', exphbs({ 
+app.engine('hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: {
-    getIcon: function (name, iconSource) { 
+    getIcon: function (name, iconSource) {
       return iconSource[name]
     },
+    isCategory: function (recordCategory, selectOption) {
+      return recordCategory === selectOption
+    }
   }
 }))
 app.set('view engine', 'hbs')
@@ -36,7 +39,7 @@ app.get('/', (req, res) => {
     .then(records => {
       category.find()
         .lean()
-        .then( categories => {
+        .then(categories => {
           records.forEach(record => {
             const recordCategory = categories.find(category => category._id.equals(record.categoryId))
             record.category = recordCategory.name
@@ -49,6 +52,22 @@ app.get('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+app.get('/records/:id/edit', (req, res) => {
+  recordId = req.params.id
+  return Record.findById(recordId)
+    .lean()
+    .then(record => {
+      Category.find()
+        .lean()
+        .then(categories => {
+          const recordCategory = categories.find(category => category._id.equals(record.categoryId))
+          record.category = recordCategory.name
+          record.date = record.date.toISOString().slice(0,10)
+          res.render('edit', { record })
+        })
+    })
+    .catch(err => console.log(err))
+})
 
 app.listen(PORT, () => {
   console.log(`App is running on https://localhost:${PORT}!`)
