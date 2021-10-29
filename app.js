@@ -35,6 +35,10 @@ app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.get('/new', (req, res) => {
+  res.render('new')
+})
+
 app.get('/', (req, res) => {
   Record.find()
     .lean()
@@ -52,6 +56,21 @@ app.get('/', (req, res) => {
           res.render('index', { records, CATEGORY, totalAmount })
         })
     })
+    .catch(err => console.log(err))
+})
+
+app.post('/', (req, res) => {
+  const {name, date, category, amount} = req.body
+  Category.findOne({ name: category})
+    .then(category => {
+      Record.create({
+        name,
+        date,
+        categoryId: category._id,
+        amount
+      })
+    })
+    .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
 
