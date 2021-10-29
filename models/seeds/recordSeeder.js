@@ -5,7 +5,7 @@ const Category = require('../category')
 const SEED_CATEGORY = { name: '家居物業' }
 
 db.once('open', () =>
-  Category.create({ name: SEED_CATEGORY.name })
+  Category.findOne({ name: SEED_CATEGORY.name})
     .then((category) =>
       Promise.all(Array.from(
         { length: 5 }, 
