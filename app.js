@@ -13,6 +13,7 @@ const CATEGORY = {
   餐飲食品: 'fas fa-utensils',
   其他: 'fas fa-pen',
 }
+let totalAmount = 0
 const app = express()
 
 
@@ -40,8 +41,9 @@ app.get('/', (req, res) => {
             const recordCategory = categories.find(category => category._id.equals(record.categoryId))
             record.category = recordCategory.name
             record.date = record.date.toLocaleDateString()
+            totalAmount += record.amount
           })
-          res.render('index', { records, CATEGORY })
+          res.render('index', { records, CATEGORY, totalAmount })
         })
     })
     .catch(err => console.log(err))
