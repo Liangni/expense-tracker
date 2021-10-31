@@ -3,8 +3,6 @@ const exphbs = require('express-handlebars')
 const bodyParser=require('body-parser')
 const methodOverride = require('method-override')
 
-const Record = require('./models/record')
-const Category = require('./models/category')
 const routes = require('./routes')
 
 const PORT = 3000
