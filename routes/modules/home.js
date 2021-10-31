@@ -35,10 +35,11 @@ router.get('/', (req, res) => {
 })
 
 router.get('/filter/:category', (req, res) => {
+  const userId = req.user._id
   const categoryFilter = req.params.category
   Category.findOne({ name: categoryFilter })
     .then(category => {
-      Record.find({ categoryId: category._id })
+      Record.find({ categoryId: category._id, userId })
         .lean()
         .then(records => {
           totalAmount = 0
