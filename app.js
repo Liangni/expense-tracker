@@ -8,7 +8,7 @@ const Category = require('./models/category')
 const PORT = 3000
 const CATEGORY = {
   家居物業: 'fas fa-home',
-  交通出行: 'fas fa- shuttle',
+  交通出行: 'fas fa-shuttle-van',
   休閒娛樂: 'fas fa-grin-beam',
   餐飲食品: 'fas fa-utensils',
   其他: 'fas fa-pen',
@@ -116,6 +116,25 @@ app.post('/records/:id/delete', (req, res) => {
     .then(record => record.remove())
     .then(res.redirect('/'))
     .catch(err => console.log(err))
+})
+
+app.get('/filter/:category', (req, res) => {
+  const categoryFilter = req.params.category
+  Category.findOne({name: categoryFilter})
+    .then(category => {
+      Record.find({categoryId: category._id})
+        .lean()
+        .then(records => {
+          totalAmount = 0
+          records.map(record => {
+            record.category = categoryFilter
+            record.date = record.date.toLocaleDateString()
+            totalAmount += record.amount
+          })
+          res.render('index', { records, CATEGORY, totalAmount })
+        })
+    })
+    .catch(err => console.log(err))    
 })
 
 app.listen(PORT, () => {
