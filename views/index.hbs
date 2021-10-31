@@ -1,57 +1,64 @@
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-    aria-expanded="false">
-    類別
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="/filter/家居物業">家居物業</a>
-    <a class="dropdown-item" href="/filter/交通出行">交通出行</a>
-    <a class="dropdown-item" href="/filter/休閒娛樂">休閒娛樂</a>
-    <a class="dropdown-item" href="/filter/餐飲食品">餐飲食品</a>
-    <a class="dropdown-item" href="/filter/其他">其他</a>
-  </div>
-</div>
+<div class="row">
+  <div class="col-4 offset-4 mt-3">
 
-{{!-- Total amount --}}
-<div class="row align-items-center">
-  <div class="col-4 offset-4">
-    <h5 class="my-0">總金額: </h5>
-    <p class="display-4 text-right text-info">{{ totalAmount }}</p>
+    {{!-- category filter --}}
+    <div class="dropdown">
+      <button class="btn btn-info dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-expanded="false">
+        類別
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/filter/家居物業">家居物業</a>
+        <a class="dropdown-item" href="/filter/交通出行">交通出行</a>
+        <a class="dropdown-item" href="/filter/休閒娛樂">休閒娛樂</a>
+        <a class="dropdown-item" href="/filter/餐飲食品">餐飲食品</a>
+        <a class="dropdown-item" href="/filter/其他">其他</a>
+      </div>
+    </div>
+
+    {{!-- total amount --}}
+    <div class="mt-5">
+      <h5 class="my-0">總金額: </h5>
+      <p class="display-4 text-right text-info">{{ totalAmount }}</p>
+    </div>
+
   </div>
 </div>
 
 {{!-- records --}}
-<div class="row">
-  <div class="col-8 offset-4">
-    <table class="table table-striped">
-      <tbody>
-        {{#each records}}
-        <tr>
-          <th>
-            <div class="row align-items-center">
-              <div class="col-2">
-                <span style="font-size: 3em"><i class='{{getIcon this.category ../CATEGORY}}'></i></span>
+  <div class="row">
+    <div class="col-8 offset-4">
+      <table class="table table-striped">
+        <tbody>
+          {{#each records}}
+          <tr>
+            <th>
+              <div class="row align-items-center">
+                <div class="col-2">
+                  <span style="font-size: 3em"><i class='{{getIcon this.category ../CATEGORY}}'></i></span>
+                </div>
+                <div class="col-6">
+                  <h5>{{ this.name }}</h5>
+                  <small>{{ this.date }}</small>
+                </div>
+                <div class="col-4">
+                  <h5>{{ this.amount }}</h5>
+                </div>
               </div>
-              <div class="col-8">
-                <h5>{{ this.name }}</h5>
-                <small>{{ this.date }}</small>
-              </div>
-              <div class="col-2">
-                <h5>{{ this.amount }}</h5>
-              </div>
-            </div>
-          </th>
-          <td class="align-middle">
-            <a href="/records/{{ this._id }}/edit">修改</a>
-            <form action="/records/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
-              <button class="btn btn-danger" type="submit">刪除</button>
-            </form>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    <a href="/records/new">新增支出</a>
+            </th>
+            <td class="align-middle">
+              <a class="btn btn-link" href="/records/{{ this._id }}/edit">修改</a>
+              <form action="/records/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
+                <button class="btn btn-link" type="submit">刪除</button>
+              </form>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <a class="btn btn-warning col-4 offset-1 mt-2 "href="/records/new">新增支出</a>
+    </div>
   </div>
-</div>
 
+
+ 
