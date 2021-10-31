@@ -14,7 +14,8 @@ const CATEGORY = {
 let totalAmount
 
 router.get('/', (req, res) => {
-  Record.find()
+  const userId = req.user._id
+  Record.find({ userId })
     .lean()
     .then(records => {
       Category.find()
