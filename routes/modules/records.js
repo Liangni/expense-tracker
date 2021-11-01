@@ -35,8 +35,8 @@ router.post('/', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
-  const recordId = req.params.id
-  return Record.findOne({recordId, userId})
+  const _id = req.params.id
+  return Record.findOne({_id, userId})
     .lean()
     .then(record => {
       Category.find()
@@ -53,9 +53,9 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const userId = req.user._id
-  const recordId = req.params.id
+  const _id = req.params.id
   const { name, date, category, amount } = req.body
-  return Record.findOne({recordId, userId})
+  return Record.findOne({_id, userId})
     .then(record => {
       return Category.findOne({ name: category })
         .then(category => {
@@ -73,8 +73,8 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const userId = req.user._id
-  recordId = req.params.id
-  return Record.findOne({recordId, userId})
+  const _id = req.params.id
+  return Record.findOne({_id, userId})
     .then(record => record.remove())
     .then(res.redirect('/'))
     .catch(err => console.log(err))
