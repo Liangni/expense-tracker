@@ -44,8 +44,8 @@ npm run dev
 #### After inserting the seeder, you may use the following dummy data to log in the web application.
 | Email              | Password |
 | -------------------| ---------|
-| user1@example.com  | 12345678 |
-| user2@example.com  | 12345678 |
+| root@example.com   | 12345678 |
+
 
 
 ## Prerequisites
