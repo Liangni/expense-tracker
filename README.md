@@ -1,34 +1,63 @@
-# 簡易記帳軟體
-## 功能描述
-使用者可以:
-* 使用Email註冊和登入
-* 使用Facebook帳號註冊和登入
-* 瀏覽所有支出
-* 分類瀏覽支出
-* 新增支出
-* 編輯支出
-* 刪除支出
+# Expense Tracker
+A project built with **[Node.js], **[Express.js], and **[MongoDB] for tracking personal expenses.
 
-## 環境需求
-* Node.js - Development Environment
-* Express - Web Application Framework
-* Express handlebars - Template Engine
-* Body-parser
-* MongoDB - Document-oriented Database
-* Mongoose - MongoDB Object Modeling(ODM)
-* Passport
-* Passport - local
-* Passport - facebook
-* Express-session
-* Bcrypt
-* Connect-flash
-* Dotenv
+To experience the application deployed on **[HEROKU], please visit https://secure-forest-54600.herokuapp.com/
 
-## 安裝與執行步驟
-1. Clone此專案至本機
-2. 開啟終端機，進入本專案資料夾
-3. 在終端機輸入下方指令啟動專案
+## Features
+*  **REGISTER:** sign up an account with name, email, password
+*  **LOGIN:** sign in to review your own expenses
+*  **LOGIN with 3rd-party account:** quick login with Facebook account
+*  **LOGOUT:** sign out the account by clicking the logout button
+*  **CREATE:** record your expense (with item name, date, category, amount) at the create page 
+*  **READ:** review all the expenses at the home page
+*  **UPDATE:** click the edit button to modify expense's data
+*  **DELETE:** click the delete button to delete the expense
+*  **FILTER:** filter the expenses by category
+
+## Installation and Execution
+1.  Clone the files to your computer
+```
+git clone https://github.com/Liangni/expense-tracker.git
+```
+2. Init: install the npm packages
+```
+cd expense-tracker
+```
+```
+npm install
+```
+3. Insert seeder (**[Must be in the following order])
+```
+npm run category-seed
+```
+```
+npm run record-seed
+```
+4. Run the project
 ```
 npm run dev
 ```
-4. 在瀏覽器輸入http://localhost:3000/ 開始使用網站
+- While the terminal returns `Express is listening on localhost:3000`, please visit http://localhost:3000 on your browser.
+
+
+## Dummy user data
+#### After inserting the seeder, you may use the following dummy data to log in the web application.
+| Email              | Password |
+| -------------------| ---------|
+| user1@example.com  | 12345678 |
+| user2@example.com  | 12345678 |
+
+
+## Prerequisites
+*  [Visual Studio Code](https://code.visualstudio.com/) - development environment
+*  [Node.js](https://nodejs.org/en/) & [npm](https://www.npmjs.com/) - JavaScript runtime environment
+*  [Express.js](https://expressjs.com/) - web application framework
+*  [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - template engine
+*  [MongoDB](https://www.mongodb.com/) - document-oriented database
+*  [Mongoose](https://mongoosejs.com/) - MongoDB object modeling tool(OBM)
+*  [body-parser](https://www.npmjs.com/package/body-parser) - middleware
+*  [method-override](https://www.npmjs.com/package/method-override) - middleware
+*  [express-session](https://www.npmjs.com/package/express-session) - middleware
+*  [passport](http://www.passportjs.org/) - authentication middleware for Node.js
+*  [bcrypt.js](https://www.npmjs.com/package/bcryptjs) - middleware
+*  [Facebook for Developer](https://developers.facebook.com/) - get APP_ID & APP_SECRET for passport-facebook
