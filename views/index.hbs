@@ -1,33 +1,28 @@
-<div class="row">
-  <div class="col-4 offset-4 mt-3">
-
-    {{!-- category filter --}}
-    <div class="dropdown">
-      <button class="btn btn-info dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-expanded="false">
-        類別
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/filter/家居物業">家居物業</a>
-        <a class="dropdown-item" href="/filter/交通出行">交通出行</a>
-        <a class="dropdown-item" href="/filter/休閒娛樂">休閒娛樂</a>
-        <a class="dropdown-item" href="/filter/餐飲食品">餐飲食品</a>
-        <a class="dropdown-item" href="/filter/其他">其他</a>
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div class="col-6">
+      {{!-- category filter --}}
+      <div class="dropdown">
+        <button class="btn btn-info dropdown-toggle btn-block" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-expanded="false">
+          類別
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/filter/家居物業">家居物業</a>
+          <a class="dropdown-item" href="/filter/交通出行">交通出行</a>
+          <a class="dropdown-item" href="/filter/休閒娛樂">休閒娛樂</a>
+          <a class="dropdown-item" href="/filter/餐飲食品">餐飲食品</a>
+          <a class="dropdown-item" href="/filter/其他">其他</a>
+        </div>
+      </div>
+      {{!-- total amount --}}
+      <div class="mt-5">
+        <h5 class="my-0">總金額: </h5>
+        <p class="display-4 text-right text-info">{{ totalAmount }}</p>
       </div>
     </div>
-
-    {{!-- total amount --}}
-    <div class="mt-5">
-      <h5 class="my-0">總金額: </h5>
-      <p class="display-4 text-right text-info">{{ totalAmount }}</p>
-    </div>
-
-  </div>
-</div>
-
-{{!-- records --}}
-  <div class="row">
-    <div class="col-8 offset-4">
+    <div class="col-12">
+      {{!-- records --}}
       <table class="table table-striped">
         <tbody>
           {{#each records}}
@@ -56,9 +51,8 @@
           {{/each}}
         </tbody>
       </table>
-      <a class="btn btn-warning col-4 offset-1 mt-2 "href="/records/new">新增支出</a>
     </div>
+    {{!-- create button --}}
+    <a class="btn btn-warning col-4 offset-1 mt-2 " href="/records/new">新增支出</a>
   </div>
-
-
- 
+</div>
