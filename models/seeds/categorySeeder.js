@@ -10,12 +10,11 @@ const collection = ['家居物業', '交通出行', '休閒娛樂', '餐飲食�
 db.once('open', () => {
   Promise.all(Array.from(
     { length: 5 }, (_, i) =>
-    Category.create({ name: collection[i] })
+      Category.create({ name: collection[i] })
   ))
-  .then(() => {
-    console.log('done')
-    process.exit()
-  })
-  .catch(err => console.log(err))
+    .then(() => {
+      console.log('done')
+      process.exit()
+    })
+    .catch(err => console.log(err))
 })
-

@@ -4,13 +4,6 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
-const CATEGORY = {
-  家居物業: 'fas fa-home',
-  交通出行: 'fas fa-shuttle-van',
-  休閒娛樂: 'fas fa-grin-beam',
-  餐飲食品: 'fas fa-utensils',
-  其他: 'fas fa-pen',
-}
 let totalAmount
 
 router.get('/', (req, res) => {
@@ -28,7 +21,7 @@ router.get('/', (req, res) => {
             record.date = record.date.toLocaleDateString()
             totalAmount += record.amount
           })
-          res.render('index', { records, CATEGORY, totalAmount })
+          res.render('index', { records, totalAmount })
         })
     })
     .catch(err => console.log(err))
@@ -43,16 +36,15 @@ router.get('/filter/:category', (req, res) => {
         .lean()
         .then(records => {
           totalAmount = 0
-          records.map(record => {
+          records.forEach(record => {
             record.category = categoryFilter
             record.date = record.date.toLocaleDateString()
             totalAmount += record.amount
           })
-          res.render('index', { records, CATEGORY, totalAmount })
+          res.render('index', { records, totalAmount })
         })
     })
     .catch(err => console.log(err))
 })
-
 
 module.exports = router

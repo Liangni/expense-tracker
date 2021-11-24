@@ -1,6 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-const bodyParser=require('body-parser')
+const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
@@ -14,6 +14,13 @@ const PORT = process.env.PORT
 
 const app = express()
 
+const CATEGORY = {
+  家居物業: 'fas fa-home',
+  交通出行: 'fas fa-shuttle-van',
+  休閒娛樂: 'fas fa-grin-beam',
+  餐飲食品: 'fas fa-utensils',
+  其他: 'fas fa-pen'
+}
 
 require('./config/mongoose')
 
@@ -21,8 +28,8 @@ app.engine('hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: {
-    getIcon: function (name, iconSource) {
-      return iconSource[name]
+    getIcon: function (name) {
+      return CATEGORY[name]
     },
     isCategory: function (recordCategory, selectOption) {
       return recordCategory === selectOption
@@ -48,7 +55,6 @@ app.use((req, res, next) => {
   next()
 })
 app.use(routes)
-
 
 app.listen(PORT, () => {
   console.log(`App is running on https://localhost:${PORT}!`)

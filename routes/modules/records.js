@@ -4,14 +4,6 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
-const CATEGORY = {
-  家居物業: 'fas fa-home',
-  交通出行: 'fas fa-shuttle-van',
-  休閒娛樂: 'fas fa-grin-beam',
-  餐飲食品: 'fas fa-utensils',
-  其他: 'fas fa-pen',
-}
-
 router.get('/new', (req, res) => {
   res.render('new')
 })
@@ -36,7 +28,7 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return Record.findOne({_id, userId})
+  return Record.findOne({ _id, userId })
     .lean()
     .then(record => {
       Category.find()
@@ -55,7 +47,7 @@ router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
   const { name, date, category, amount } = req.body
-  return Record.findOne({_id, userId})
+  return Record.findOne({ _id, userId })
     .then(record => {
       return Category.findOne({ name: category })
         .then(category => {
@@ -74,11 +66,10 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return Record.findOne({_id, userId})
+  return Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(res.redirect('/'))
     .catch(err => console.log(err))
 })
-
 
 module.exports = router
