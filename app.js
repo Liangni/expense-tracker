@@ -14,13 +14,6 @@ const PORT = process.env.PORT
 
 const app = express()
 
-const CATEGORY = {
-  家居物業: 'fas fa-home',
-  交通出行: 'fas fa-shuttle-van',
-  休閒娛樂: 'fas fa-grin-beam',
-  餐飲食品: 'fas fa-utensils',
-  其他: 'fas fa-pen'
-}
 
 require('./config/mongoose')
 
@@ -28,9 +21,6 @@ app.engine('hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: {
-    getIcon: function (name) {
-      return CATEGORY[name]
-    },
     isCategory: function (recordCategory, selectOption) {
       return recordCategory === selectOption
     }
