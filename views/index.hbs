@@ -8,8 +8,9 @@
           類別
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item {{#ifCond '' categoryId }}active{{/ifCond}}" href="?categoryId=">全部</a>
           {{#each categories }}
-          <a class="dropdown-item" href="/category/{{this._id}}">{{this.name}}</a>
+          <a class="dropdown-item {{#ifCond this._id ../categoryId }}active{{/ifCond}}" href="?categoryId={{this._id}}">{{this.name}}</a>
           {{/each}}
         </div>
       </div>

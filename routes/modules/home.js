@@ -8,9 +8,10 @@ const Category = require('../../models/category')
 
 router.get('/', (req, res) => {
   const userId = req.user._id
+  const categoryId = req.query.categoryId || ''
   let totalAmount = 0
   let recordData
-  Record.find({ userId })
+  Record.find(categoryId ? { userId, categoryId } : { userId })
     .populate('categoryId')
     .lean()
     .then(records => {
@@ -23,27 +24,9 @@ router.get('/', (req, res) => {
       })
       return Category.find().lean()
     })
-    .then(categories => { res.render('index', { records: recordData, totalAmount, categories }) })
+    .then(categories => { res.render('index', { records: recordData, totalAmount, categories, categoryId }) })
     .catch(err => console.log(err))
 })
 
-router.get('/category/:categoryId', (req, res) => {
-  const userId = req.user._id
-  const categoryId = req.params.categoryId
-  let totalAmount = 0
-  let recordData
-  Record.find({ categoryId, userId })
-    .populate('categoryId')
-    .lean()
-    .then(records => {
-      recordData = records.map(record => {
-        totalAmount += record.amount
-        return { ...record, date: record.date.toLocaleDateString() }
-      })
-      return Category.find().lean()
-    })
-    .then(categories => res.render('index', { records: recordData, totalAmount, categories }))
-    .catch(err => console.log(err))
-})
 
 module.exports = router
