@@ -31,14 +31,14 @@ router.get('/:id/edit', (req, res) => {
   let recordData
   return Record.findOne({ _id, userId }).lean()
     .then(record => {
-      recordData = { 
+      recordData = {
         ...record,
         categoryId: record.categoryId.toString(), //將ObjectId轉成字串才能在前端樣板進行ifCond的比較
         date: record.date.toISOString().slice(0, 10)
       }
       return Category.find().lean()
     })
-    .then(categories => { 
+    .then(categories => {
       res.render('edit', { record: recordData, categories })
     })
     .catch(err => console.log(err))
@@ -47,20 +47,18 @@ router.get('/:id/edit', (req, res) => {
 router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  const { name, date, category, amount } = req.body
+  const { name, date, categoryId, amount } = req.body
+  if (!name || !date || !categoryId || !amount) throw new Error('使用者有未填欄位!')
+
   return Record.findOne({ _id, userId })
     .then(record => {
-      return Category.findOne({ name: category })
-        .then(category => {
-          record.name = name
-          record.date = date
-          record.categoryId = category._id
-          record.amount = amount
-          return record.save()
-        })
-        .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
+      record.name = name
+      record.date = date
+      record.categoryId = categoryId
+      record.amount = amount
+      return record.save()
     })
+    .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
 
