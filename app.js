@@ -24,9 +24,6 @@ app.engine('hbs', exphbs({
     ifCond: function (a, b, options) {
       return a == b ? options.fn(this) : options.inverse(this)
     },
-    isCategory: function (recordCategory, selectOption) {
-      return recordCategory === selectOption
-    }
   }
 }))
 app.set('view engine', 'hbs')

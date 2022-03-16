@@ -5,7 +5,9 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 router.get('/new', (req, res) => {
-  res.render('new')
+  Category.find()
+  .lean()
+  .then(categories => res.render('edit', { categories }))
 })
 
 router.post('/', (req, res) => {
