@@ -6,23 +6,21 @@ const Category = require('../../models/category')
 
 router.get('/new', (req, res) => {
   Category.find()
-  .lean()
-  .then(categories => res.render('edit', { categories }))
+    .lean()
+    .then(categories => res.render('edit', { categories }))
 })
 
 router.post('/', (req, res) => {
   const userId = req.user._id
-  const { name, date, category, amount } = req.body
-  Category.findOne({ name: category })
-    .then(category => {
-      Record.create({
-        name,
-        date,
-        categoryId: category._id,
-        amount,
-        userId
-      })
-    })
+  const { name, date, categoryId, amount } = req.body
+  if (!name || !date || !categoryId || !amount) throw new Error('使用者有未填欄位!')
+  return Record.create({
+    name,
+    date,
+    categoryId,
+    amount,
+    userId
+  })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })

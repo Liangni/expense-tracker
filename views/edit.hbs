@@ -14,15 +14,15 @@
     <form action={{#if record}}"/records/{{record._id}}/?_method=PUT"{{else}}"/records"{{/if}}, method="POST">
       <div class="form-group">
         <label for="name">名稱*: </label>
-        <input type="text" class="form-control" id="name" name="name"value="{{record.name}}">
+        <input type="text" class="form-control" id="name" name="name"value="{{record.name}}"required>
       </div>
       <div class="form-group">
         <label for="date">日期*: </label>
-        <input type="date" class="form-control" id="date" name="date" value="{{record.date}}">
+        <input type="date" class="form-control" id="date" name="date" value="{{record.date}}"required>
       </div>
       <div class="form-group">
         <label for="category">類別*: </label>
-        <select name="category" class="form-control" id="category">
+        <select name="categoryId" class="form-control" id="category">
           {{#each categories}}
           <option value="{{this._id}}"{{#ifCond record.categoryId this._id}}selected{{/ifCond}}>
             {{this.name}}
@@ -32,7 +32,7 @@
       </div>
       <div class="form-group">
         <label for="amount">金額*: </label>
-        <input type="number" class="form-control" id="amount" name="amount" value="{{record.amount}}">
+        <input type="number" class="form-control" id="amount" name="amount" value="{{record.amount}}" min ="0" required>
       </div>
       <button type="submit" class="btn btn-primary">{{#if record}}送出{{else}}新增支出{{/if}}</button>
     </form>
