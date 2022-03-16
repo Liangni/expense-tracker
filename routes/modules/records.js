@@ -28,17 +28,18 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return Record.findOne({ _id, userId })
-    .lean()
+  let recordData
+  return Record.findOne({ _id, userId }).lean()
     .then(record => {
-      Category.find()
-        .lean()
-        .then(categories => {
-          const recordCategory = categories.find(category => category._id.equals(record.categoryId))
-          record.category = recordCategory.name
-          record.date = record.date.toISOString().slice(0, 10)
-          res.render('edit', { record })
-        })
+      recordData = { 
+        ...record,
+        categoryId: record.categoryId.toString(), //將ObjectId轉成字串才能在前端樣板進行ifCond的比較
+        date: record.date.toISOString().slice(0, 10)
+      }
+      return Category.find().lean()
+    })
+    .then(categories => { 
+      res.render('edit', { record: recordData, categories })
     })
     .catch(err => console.log(err))
 })
