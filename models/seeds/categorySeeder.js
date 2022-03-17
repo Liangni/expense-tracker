@@ -14,13 +14,19 @@ const collection = [
 ]
 
 db.once('open', () => {
-  Promise.all(Array.from(
-    { length: 5 }, (_, i) =>
+  return Promise.all(Array.from(
+    { length: 4 }, (_, i) =>
       Category.create({ 
         name: collection[i].name,
         iconClass: collection[i].iconClass
       })
   ))
+    .then(() => { // 確保[其他]在所有類別中排序最後
+      return Category.create({
+        name: collection[4].name,
+        iconClass: collection[4].iconClass
+      })
+    })
     .then(() => {
       console.log('done')
       process.exit()
