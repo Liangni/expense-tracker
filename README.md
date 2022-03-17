@@ -3,6 +3,8 @@ A project built with **Node.js**, **Express.js**, and **MongoDB** for tracking p
 
 To experience the application deployed on **HEROKU**, please visit https://secure-forest-54600.herokuapp.com/
 
+![image](/public/images/home-pic.PNG)
+
 ## Features
 *  **REGISTER:** sign up an account with name, email, password
 *  **LOGIN:** sign in to review your own expenses
@@ -54,7 +56,7 @@ npm run dev
 *  [Express.js](https://expressjs.com/) - web application framework
 *  [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - template engine
 *  [MongoDB](https://www.mongodb.com/) - document-oriented database
-*  [Mongoose](https://mongoosejs.com/) - MongoDB object modeling tool(OBM)
+*  [Mongoose](https://mongoosejs.com/) - MongoDB object document modeling tool(ODM)
 *  [body-parser](https://www.npmjs.com/package/body-parser) - middleware
 *  [method-override](https://www.npmjs.com/package/method-override) - middleware
 *  [express-session](https://www.npmjs.com/package/express-session) - middleware
