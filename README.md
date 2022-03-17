@@ -1,5 +1,5 @@
 # Expense Tracker
-A project built with **Node.js**, **Express.js**, and **MongoDB** for tracking personal expenses.
+A project built with **Node.js**, **Express.js**, and **MongoDB** for tracking personal expenses, which allows **LOGIN with 3rd-party(Facebook) account**.
 
 To experience the application deployed on **HEROKU**, please visit https://secure-forest-54600.herokuapp.com/
 
