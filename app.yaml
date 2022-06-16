@@ -1,7 +1,7 @@
 runtime: nodejs14
 env_variables:
   FACEBOOK_CALLBACK: https://alien-fold-347804.de.r.appspot.com/auth/facebook/callback
-  FACEBOOK_ID: 314163323466396
-  FACEBOOK_SECRET: a535889d43d621f024543179854d7884
-  MONGODB_URI: mongodb+srv://root:CHLW27dPnOrnLd9Q@cluster0.fu9mc.mongodb.net/expense-tracker?retryWrites=true&w=majority
+  FACEBOOK_ID: process.env.FACEBOOK_ID
+  FACEBOOK_SECRET: process.env.FACEBOOK_SECRET
+  MONGODB_URI: process.env.MONGODB_URI_FOR_DEPLOYMENT
   SESSION_SECRET: ThisIsHerokuSecret
