@@ -28,7 +28,7 @@ cd expense-tracker
 ```
 npm install
 ```
-3. Insert seeder (**[Must be in the following order])
+3. Insert seeder (**Must be in the following order**)
 ```
 npm run category-seed
 ```
@@ -39,7 +39,7 @@ npm run record-seed
 ```
 npm run dev
 ```
-- While the terminal returns `Express is listening on localhost:3000`, please visit http://localhost:3000 on your browser.
+- While the terminal returns `App is running on https://localhost:3000`, please visit http://localhost:3000 on your browser.
 
 
 ## Dummy user data
